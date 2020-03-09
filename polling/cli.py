@@ -23,3 +23,12 @@ def raw():
     result = client.polls()
     print(pretty_dumps(result))
 
+
+@click.option('--house', default=None)
+@polls.command()
+def search(house):
+    client = HuffpoClient()
+    result = client.polls()
+    filtered = [i for i in result['items'] if i['survey_house'] == house]
+    print(pretty_dumps(filtered))
+
